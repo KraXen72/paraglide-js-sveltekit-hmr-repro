@@ -2,6 +2,8 @@
 	import { page } from '$app/stores';
 	import logo from '$lib/images/svelte-logo.svg';
 	import github from '$lib/images/github.svg';
+
+	import { setLanguageTag } from '$paraglide/runtime';
 </script>
 
 <header>
@@ -25,6 +27,8 @@
 			<li aria-current={$page.url.pathname.startsWith('/sverdle') ? 'page' : undefined}>
 				<a href="/sverdle">Sverdle</a>
 			</li>
+			<button class="btn" on:click={() => { setLanguageTag('sk') }}>SK</button>
+			<button class="btn" on:click={() => { setLanguageTag('en') }}>EN</button>
 		</ul>
 		<svg viewBox="0 0 2 3" aria-hidden="true">
 			<path d="M0,0 L0,3 C0.5,3 0.5,3 1,2 L2,0 Z" />

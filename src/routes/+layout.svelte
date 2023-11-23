@@ -1,19 +1,34 @@
-<script>
+<script lang="ts">
 	import Header from './Header.svelte';
 	import './styles.css';
+	import { browser } from '$app/environment';
+
+	import { languageTag as getInitialLang, onSetLanguageTag, type AvailableLanguageTag } from '$paraglide/runtime';
+
+	let languageTag = getInitialLang();
+	if (browser) onSetLanguageTag(handleLanguageChange);
+	
+	console.log(languageTag)
+
+	function handleLanguageChange(lang: AvailableLanguageTag) {
+		languageTag = lang
+		console.log('handleLanguageChange')
+	}
 </script>
 
-<div class="app">
-	<Header />
+{#key languageTag}
+	<div class="app">
+		<Header />
+	
+		<main>
+			<slot />
+		</main>
 
-	<main>
-		<slot />
-	</main>
-
-	<footer>
-		<p>visit <a href="https://kit.svelte.dev">kit.svelte.dev</a> to learn SvelteKit</p>
-	</footer>
-</div>
+		<footer>
+			<p>visit <a href="https://kit.svelte.dev">kit.svelte.dev</a> to learn SvelteKit</p>
+		</footer>
+	</div>
+{/key}
 
 <style>
 	.app {
